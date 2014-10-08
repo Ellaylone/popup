@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Popup</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<style type="text/css">
+		html, body{
+			height:100%;
+		}
+		.modal-dialog-center {
+			margin: 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+		}
+
+		.modal-body {
+			overflow-y: auto;
+		}
+		.modal-footer {
+			margin-top: 0;
+		}
+
+		@media (max-width: 767px) {
+			.modal-dialog-center {
+				width: 100%;
+			}
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			function adjustModalMaxHeightAndPosition(){
+				$('.modal').each(function(){
+					if($(this).hasClass('in') === false){
+						$(this).show();
+					}
+					var contentHeight = $(window).height() - 60;
+					var headerHeight = $(this).find('.modal-header').outerHeight() || 2;
+					var footerHeight = $(this).find('.modal-footer').outerHeight() || 2;
+
+					$(this).find('.modal-content').css({
+						'max-height': function () {
+							return contentHeight;
+						}
+					});
+
+					$(this).find('.modal-body').css({
+						'max-height': function () {
+							return contentHeight - (headerHeight + footerHeight);
+						}
+					});
+
+					$(this).find('.modal-dialog').addClass('modal-dialog-center').css({
+						'margin-top': function () {
+							return -($(this).outerHeight() / 2);
+						},
+						'margin-left': function () {
+							return -($(this).outerWidth() / 2);
+						}
+					});
+					if($(this).hasClass('in') === false){
+						$(this).hide();
+					}
+				});
+			}
+			if ($(window).height() >= 320){
+				$(window).resize(adjustModalMaxHeightAndPosition).trigger("resize");
+			}
+
+		});
+	</script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-xs-12">
+				<h1>Всплывающее окно</h1>
+				<h2>Задача</h2>
+				<p>Сверстайте всплывающее окно (попап) — элемент, который показывается поверх содержимого веб-страницы. Он должен всегда находиться в её центре, при этом размер контента может меняться. Предложите максимальное количество решений и объясните, какие у каждого из них есть недостатки и преимущества. Результат пришлите в виде ссылки на GitHub.</p>
+				<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalShort">Короткий текст</button>
+				<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalLong">Длинный текст</button>
+			</div>
+		</div>
+	</div><!-- //container-fluid -->
+
+	<!-- modalShort -->
+	<div class="modal fade" id="modalShort" tabindex="-1" role="dialog" aria-labelledby="modalShortLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="modalShortLabel">Почему разрушаем стресс?</h4>
+				</div>
+				<div class="modal-body">
+					<p>Напряжение просветляет сушильный шкаф. Желтозём вызывает чернозём. Чизелевание, на первый взгляд, взаимно. Бурозём по определению теоретически возможен. Органическое вещество ненаблюдаемо.</p>
+					<p>Поэтому совсем не случайно то, что генезис адсорбирует латерит. Катена, как следствие уникальности почвообразования в данных условиях, нагревает биокосный бихевиоризм как при нагреве, так и при охлаждении. Партлювация притягивает филогенез.</p>
+					<p>Оглеение, в сочетании с традиционными агротехническими приемами, последовательно. Верховодка экстремально просветляет девиантный электрод при любом их взаимном расположении. Перцепция инструментально обнаружима. Электрод дает тензиометр одинаково по всем направлениям.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //modalShort -->
+	<!-- modalLong -->
+	<div class="modal fade" id="modalLong" tabindex="-1" role="dialog" aria-labelledby="modalLongLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="modalLongLabel">Почему разрушаем стресс?</h4>
+				</div>
+				<div class="modal-body">
+					<p>Переходное состояние, следовательно, изящно иллюстрирует самодостаточный холерик. Художественная контаминация, на первый взгляд, вероятна. Богатство мировой литературы от Платона до Ортеги-и-Гассета свидетельствует о том, что гений образует художественный идеал.</p>
+					<p>Композиция, как бы это ни казалось парадоксальным, трансформирует глубокий архетип. Интерпретация, следовательно, продолжает классический реализм. Коллективное бессознательное, как бы это ни казалось парадоксальным, монотонно продолжает комплекс агрессивности. Беспристрастный анализ любого творческого акта показывает, что героическое многопланово заканчивает определенный декаданс. Эротическое готично диссонирует незначительный онтогенез, именно об этом комплексе движущих сил писал З.Фрейд в теории сублимации.</p>
+					<p>Эмпирическая история искусств образует деструктивный художественный талант, таким образом, все перечисленные признаки архетипа и мифа подтверждают, что действие механизмов мифотворчества сродни механизмам художественно-продуктивного мышления. Прекрасное, следовательно, многопланово иллюстрирует незначительный экзистенциализм. Ролевое поведение, на первый взгляд, представляет собой феномер "психической мутации". Весьма существенно следующее: трагическое образует символизм. Развивая эту тему, восприятие сотворчества использует маньеризм. Добавлю, что теоретическая социология готично дает гений.</p>
+					<p>Целое образа одновременно. В работе "Парадокс об актере" Дидро обращал внимание на то, как эзотерическое диссонирует первоначальный эйдос. Иными словами, игровое начало трансформирует определенный общекультурный цикл. Хорал вызывает первоначальный канон. Очевидно, что воображение дает художественный талант. Аллегория изящно просветляет непосредственный феномер "психической мутации".</p>
+					<p>Художественная ментальность изящно аккумулирует канон биографии. Биографический метод продолжает филогенез, что-то подобное можно встретить в работах Ауэрбаха и Тандлера. Аполлоновское начало, на первый взгляд, аккумулирует онтологический статус искусства. Шиллер утверждал: синхронический подход просветляет импрессионизм.</p>
+					<p>Воображение, следовательно, косвенно. Искусство, по определению, многопланово представляет собой суггестивный меланхолик. Теория вчувствования иллюстрирует хорал. Воображение, в первом приближении, изящно дает сокращенный "кодекс деяний".</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //modalLong -->
+</body>
+</html>
