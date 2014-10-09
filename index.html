@@ -5,7 +5,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<style type="text/css">
 		html, body{
@@ -33,6 +32,20 @@
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$('body').on('click', '[data-toggle="modal"]', function(){
+				toggleModal($($(this).data('target')));
+			});
+			$('body').on('click', '[data-dismiss]', function(){
+				toggleModal($('#' + $(this).parents('.modal').attr('id')));
+			});
+			$('body').on('click', function(e){
+				if($(e.target).hasClass('modal')){
+					toggleModal($(e.target));
+				}
+			})
+			function toggleModal(target){
+				target.toggleClass('fade').slideToggle();
+			}
 			function adjustModalMaxHeightAndPosition(){
 				$('.modal').each(function(){
 					if($(this).hasClass('in') === false){
