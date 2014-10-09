@@ -31,21 +31,29 @@
 		}
 	</style>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('body').on('click', '[data-toggle="modal"]', function(){
-				toggleModal($($(this).data('target')));
-			});
-			$('body').on('click', '[data-dismiss]', function(){
-				toggleModal($('#' + $(this).parents('.modal').attr('id')));
-			});
-			$('body').on('click', function(e){
-				if($(e.target).hasClass('modal')){
-					toggleModal($(e.target));
-				}
-			})
+		(function($){
+			$.fn.popup = function(){
+				$(document).on('click', function(e){
+					if($(e.target).hasClass('modal')){
+						toggleModal($(e.target));
+					}
+				})
+				$(document).on('click', '[data-dismiss]', function(){
+					toggleModal($('#' + $(this).parents('.modal').attr('id')));
+				});
+				return this.each(function(){
+					var target = $(this);
+					$(document).on('click', '[data-target="#' + target.prop('id') + '"]', function(){
+						toggleModal(target);
+					});
+				})
+			};
 			function toggleModal(target){
 				target.toggleClass('fade').slideToggle();
 			}
+		}(jQuery))
+		$(document).ready(function() {
+			$('.modal').popup();
 			function adjustModalMaxHeightAndPosition(){
 				$('.modal').each(function(){
 					if($(this).hasClass('in') === false){
